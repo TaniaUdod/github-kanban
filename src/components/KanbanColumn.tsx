@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useDrop } from 'react-dnd';
 import { IssueStatus, ItemType, KanbanColumnProps } from '../types/types';
 import IssueCard from './IssueCard';
-import { Text, VStack } from '@chakra-ui/react';
+import { Text, useColorModeValue, VStack } from '@chakra-ui/react';
 
 const KanbanColumn: React.FC<KanbanColumnProps> = ({
   column,
@@ -10,6 +10,8 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
   moveIssue,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const bgColor = useColorModeValue('gray.100', 'gray.700');
+  const textColor = useColorModeValue('black', 'white');
 
   const [, drop] = useDrop({
     accept: ItemType.ISSUE,
@@ -38,10 +40,11 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
       ref={ref}
       flex={1}
       p={4}
-      bg="gray.100"
       borderRadius="md"
       w="100%"
       align="stretch"
+      bg={bgColor}
+      color={textColor}
     >
       <Text fontSize="lg" fontWeight="bold" textAlign="center">
         {column}

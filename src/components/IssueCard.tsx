@@ -2,7 +2,14 @@ import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { IssueCardProps, IssueStatus, ItemType } from '../types/types';
 import { calculateDaysAgo } from '../utils/calculateDaysAgo';
-import { Badge, Box, Heading, HStack, Text } from '@chakra-ui/react';
+import {
+  Badge,
+  Box,
+  Heading,
+  HStack,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react';
 
 const IssueCard: React.FC<IssueCardProps> = ({
   issue,
@@ -11,6 +18,8 @@ const IssueCard: React.FC<IssueCardProps> = ({
   moveIssue,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const bgColor = useColorModeValue('white', 'gray.800');
+  const textColor = useColorModeValue('black', 'white');
 
   const [{ isDragging }, drag] = useDrag({
     type: ItemType.ISSUE,
@@ -49,12 +58,13 @@ const IssueCard: React.FC<IssueCardProps> = ({
     <Box
       ref={ref}
       opacity={isDragging ? 0.5 : 1}
-      bg="white"
       p={4}
       my={2}
       borderRadius="md"
       boxShadow="md"
       cursor="grab"
+      bg={bgColor}
+      color={textColor}
     >
       <Heading size="sm" mb={2}>
         {issue.title}

@@ -14,22 +14,26 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { formatNumber } from '../utils/formatNumber';
 import KanbanColumn from './KanbanColumn';
 import githubIcon from '../assets/github.svg';
-import { useToast } from '@chakra-ui/react';
 import {
-  InputGroup,
-  InputLeftElement,
-  Input,
-  Button,
   Box,
+  Button,
   Flex,
   Heading,
-  Text,
+  IconButton,
+  Input,
+  InputGroup,
+  InputLeftElement,
   Link,
+  Text,
+  useColorMode,
+  useToast
 } from '@chakra-ui/react';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 const KanbanBoard = () => {
   const dispatch = useDispatch<AppDispatch>();
   const toast = useToast();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const { issues, stars, positions } = useSelector(
     (state: RootState) => state.issues
@@ -183,9 +187,19 @@ const KanbanBoard = () => {
 
   return (
     <Box maxW="1200px" mx="auto" p="6">
-      <Heading as="h1" size="lg" mb="6" textAlign="center">
-        Kanban Board
-      </Heading>
+      <Flex justify="center" align="center" mb="6" position="relative">
+        <Heading as="h1" size="lg" textAlign="center">
+          Kanban Board
+        </Heading>
+        <IconButton
+          position="absolute"
+          right="0"
+          aria-label="Toggle theme"
+          icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+          onClick={toggleColorMode}
+          colorScheme="blue"
+        />
+      </Flex>
       <Flex gap="4" mb="2" p="4">
         <InputGroup>
           <InputLeftElement pointerEvents="none">
@@ -261,10 +275,8 @@ const KanbanBoard = () => {
                 key={column}
                 flex="1"
                 minW="300px"
-                bg="gray.100"
                 borderRadius="md"
                 minH="400px"
-                boxShadow="md"
               >
                 <KanbanColumn
                   key={column}
