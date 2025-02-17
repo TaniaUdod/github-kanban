@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/github-kanban/static/js/main.52576801.js",
+    "static/media/github.svg": "/github-kanban/static/media/github.5531be85d7a8d6f333e5c7136944a022.svg",
+    "index.html": "/github-kanban/index.html",
+    "main.52576801.js.map": "/github-kanban/static/js/main.52576801.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.52576801.js"
+  ]
+}
